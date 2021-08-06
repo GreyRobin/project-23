@@ -5,28 +5,38 @@ const Constraint = Matter.Constraint;
 
 var engine, world;
 var canvas;
-var player
-var playerbase
-var compplayer
-var compbase
+var palyer, playerBase;
+var computer, computerBase;
+
 
 function setup() {
   canvas = createCanvas(windowWidth, windowHeight);
-  
-   //Initialising Engine
+
   engine = Engine.create();
   world = engine.world;
-	
-   //Create Player Base and Computer Base Object
-   player = new Player(200,-30,0,0)
-   compplayer = new ComputerPlayer(-200,-30,0,0)
-   playerbase = new PlayerBase(200,0,0,0)
-   compbase = new ComputerBase(-200,0,0,0)
- }
+
+  playerBase = new PlayerBase(300, random(450, height - 300), 180, 150);
+  player = new Player(285, playerBase.body.position.y - 153, 50, 180);
+
+
+  computerBase = new ComputerBase(
+    width - 300,
+    random(450, height - 300),
+    180,
+    150
+  );
+  computer = new Computer(
+    width - 280,
+    computerBase.body.position.y - 153,
+    50,
+    180
+  );
+
+  
+}
 
 function draw() {
-
-  background(180);
+  background(189);
 
   Engine.update(engine);
 
@@ -36,12 +46,13 @@ function draw() {
   textSize(40);
   text("EPIC ARCHERY", width / 2, 100);
 
-   //Display Playerbase and computer base 
-  playerbase.display()
-  compbase.display()
+ 
+  playerBase.display();
+  player.display();
+  
 
-   //display Player and computerplayer
-   player.display()
-   compplayer.display()
+  computerBase.display();
+  computer.display();
+  
 
 }
